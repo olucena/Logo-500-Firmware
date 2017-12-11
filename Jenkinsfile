@@ -332,6 +332,118 @@ pipeline {
           }
         }
 
+        stage('ROS mission 1') {
+          agent {
+            docker {
+              image 'px4io/px4-dev-ros:2017-12-30'
+              args '-e CCACHE_DIR=/tmp/ccache -v /tmp/ccache:/tmp/ccache:rw -e HOME=$WORKSPACE'
+            }
+          }
+          steps {
+            sh 'make posix_sitl_default'
+            sh 'make posix_sitl_default sitl_gazebo'
+            sh './test/rostest_px4_run.sh mavros_posix_test_mission.test mission:=vtol_new_1.txt vehicle:=vtol_standard'
+          }
+        }
+
+        stage('ROS mission 2') {
+          agent {
+            docker {
+              image 'px4io/px4-dev-ros:2017-12-30'
+              args '-e CCACHE_DIR=/tmp/ccache -v /tmp/ccache:/tmp/ccache:rw -e HOME=$WORKSPACE'
+            }
+          }
+          steps {
+            sh 'make posix_sitl_default'
+            sh 'make posix_sitl_default sitl_gazebo'
+            sh './test/rostest_px4_run.sh mavros_posix_test_mission.test mission:=vtol_new_2.txt vehicle:=vtol_standard'
+          }
+        }
+
+        stage('ROS mission 3') {
+          agent {
+            docker {
+              image 'px4io/px4-dev-ros:2017-12-30'
+              args '-e CCACHE_DIR=/tmp/ccache -v /tmp/ccache:/tmp/ccache:rw -e HOME=$WORKSPACE'
+            }
+          }
+          steps {
+            sh 'make posix_sitl_default'
+            sh 'make posix_sitl_default sitl_gazebo'
+            sh './test/rostest_px4_run.sh mavros_posix_test_mission.test mission:=vtol_old_1.txt vehicle:=vtol_standard'
+          }
+        }
+
+        stage('ROS mission 4') {
+          agent {
+            docker {
+              image 'px4io/px4-dev-ros:2017-12-30'
+              args '-e CCACHE_DIR=/tmp/ccache -v /tmp/ccache:/tmp/ccache:rw -e HOME=$WORKSPACE'
+            }
+          }
+          steps {
+            sh 'make posix_sitl_default'
+            sh 'make posix_sitl_default sitl_gazebo'
+            sh './test/rostest_px4_run.sh mavros_posix_test_mission.test mission:=vtol_old_2.txt vehicle:=vtol_standard'
+          }
+        }
+
+        stage('ROS mission 5') {
+          agent {
+            docker {
+              image 'px4io/px4-dev-ros:2017-12-30'
+              args '-e CCACHE_DIR=/tmp/ccache -v /tmp/ccache:/tmp/ccache:rw -e HOME=$WORKSPACE'
+            }
+          }
+          steps {
+            sh 'make posix_sitl_default'
+            sh 'make posix_sitl_default sitl_gazebo'
+            sh './test/rostest_px4_run.sh mavros_posix_test_mission.test mission:=vtol_old_3.txt vehicle:=vtol_standard'
+          }
+        }
+
+        stage('ROS mission 6') {
+          agent {
+            docker {
+              image 'px4io/px4-dev-ros:2017-12-30'
+              args '-e CCACHE_DIR=/tmp/ccache -v /tmp/ccache:/tmp/ccache:rw -e HOME=$WORKSPACE'
+            }
+          }
+          steps {
+            sh 'make posix_sitl_default'
+            sh 'make posix_sitl_default sitl_gazebo'
+            sh './test/rostest_px4_run.sh mavros_posix_test_mission.test mission:=multirotor_box.mission vehicle:=iris'
+          }
+        }
+
+        stage('ROS offboard att') {
+          agent {
+            docker {
+              image 'px4io/px4-dev-ros:2017-12-30'
+              args '-e CCACHE_DIR=/tmp/ccache -v /tmp/ccache:/tmp/ccache:rw -e HOME=$WORKSPACE'
+            }
+          }
+          steps {
+            sh 'make posix_sitl_default'
+            sh 'make posix_sitl_default sitl_gazebo'
+            sh './test/rostest_px4_run.sh mavros_posix_tests_offboard_attctl.test'
+          }
+        }
+
+        stage('ROS offboard pos') {
+          agent {
+            docker {
+              image 'px4io/px4-dev-ros:2017-12-30'
+              args '-e CCACHE_DIR=/tmp/ccache -v /tmp/ccache:/tmp/ccache:rw -e HOME=$WORKSPACE'
+            }
+          }
+          steps {
+            sh 'make posix_sitl_default'
+            sh 'make posix_sitl_default sitl_gazebo'
+            sh './test/rostest_px4_run.sh mavros_posix_tests_offboard_posctl.test'
+          }
+        }
+
         // temporarily disabled until stable
         //stage('tests coverage') {
         //  agent {
