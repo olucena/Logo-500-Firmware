@@ -340,9 +340,18 @@ pipeline {
             }
           }
           steps {
+            sh 'make clean; rm -rf .ros; rm -rf .gazebo'
             sh 'make posix_sitl_default'
             sh 'make posix_sitl_default sitl_gazebo'
             sh './test/rostest_px4_run.sh mavros_posix_test_mission.test mission:=vtol_new_1.txt vehicle:=vtol_standard'
+          }
+          post {
+            always {
+              archiveArtifacts '**/*.ulg'
+              archiveArtifacts '.ros/log/*.log'
+              archiveArtifacts '.ros/test_results/px4/**.xml'
+              sh './Tools/upload_log.py -q --description "${ghprbPullDescription}" --source CI .ros/rootfs/fs/microsd/log/*/*.ulg'
+            }
           }
         }
 
