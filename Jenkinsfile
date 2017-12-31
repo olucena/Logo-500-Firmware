@@ -350,7 +350,7 @@ pipeline {
               archiveArtifacts '**/*.ulg'
               archiveArtifacts '.ros/log/*.log'
               archiveArtifacts '.ros/test_results/px4/**.xml'
-              sh './Tools/upload_log.py -q --description "${ghprbPullDescription}" --source CI .ros/rootfs/fs/microsd/log/*/*.ulg'
+              //sh './Tools/upload_log.py -q --description "${ghprbPullDescription}" --source CI .ros/rootfs/fs/microsd/log/*/*.ulg'
             }
           }
         }
@@ -363,9 +363,18 @@ pipeline {
             }
           }
           steps {
+            sh 'make clean; rm -rf .ros; rm -rf .gazebo'
             sh 'make posix_sitl_default'
             sh 'make posix_sitl_default sitl_gazebo'
             sh './test/rostest_px4_run.sh mavros_posix_test_mission.test mission:=vtol_new_2.txt vehicle:=vtol_standard'
+          }
+          post {
+            always {
+              archiveArtifacts '**/*.ulg'
+              archiveArtifacts '.ros/log/*.log'
+              archiveArtifacts '.ros/test_results/px4/**.xml'
+              //sh './Tools/upload_log.py -q --description "${ghprbPullDescription}" --source CI .ros/rootfs/fs/microsd/log/*/*.ulg'
+            }
           }
         }
 
@@ -377,9 +386,18 @@ pipeline {
             }
           }
           steps {
+            sh 'make clean; rm -rf .ros; rm -rf .gazebo'
             sh 'make posix_sitl_default'
             sh 'make posix_sitl_default sitl_gazebo'
             sh './test/rostest_px4_run.sh mavros_posix_test_mission.test mission:=vtol_old_1.txt vehicle:=vtol_standard'
+          }
+          post {
+            always {
+              archiveArtifacts '**/*.ulg'
+              archiveArtifacts '.ros/log/*.log'
+              archiveArtifacts '.ros/test_results/px4/**.xml'
+              //sh './Tools/upload_log.py -q --description "${ghprbPullDescription}" --source CI .ros/rootfs/fs/microsd/log/*/*.ulg'
+            }
           }
         }
 
@@ -391,9 +409,18 @@ pipeline {
             }
           }
           steps {
+            sh 'make clean; rm -rf .ros; rm -rf .gazebo'
             sh 'make posix_sitl_default'
             sh 'make posix_sitl_default sitl_gazebo'
             sh './test/rostest_px4_run.sh mavros_posix_test_mission.test mission:=vtol_old_2.txt vehicle:=vtol_standard'
+          }
+          post {
+            always {
+              archiveArtifacts '**/*.ulg'
+              archiveArtifacts '.ros/log/*.log'
+              archiveArtifacts '.ros/test_results/px4/**.xml'
+              //sh './Tools/upload_log.py -q --description "${ghprbPullDescription}" --source CI .ros/rootfs/fs/microsd/log/*/*.ulg'
+            }
           }
         }
 
@@ -405,9 +432,18 @@ pipeline {
             }
           }
           steps {
+            sh 'make clean; rm -rf .ros; rm -rf .gazebo'
             sh 'make posix_sitl_default'
             sh 'make posix_sitl_default sitl_gazebo'
             sh './test/rostest_px4_run.sh mavros_posix_test_mission.test mission:=vtol_old_3.txt vehicle:=vtol_standard'
+          }
+          post {
+            always {
+              archiveArtifacts '**/*.ulg'
+              archiveArtifacts '.ros/log/*.log'
+              archiveArtifacts '.ros/test_results/px4/**.xml'
+              //sh './Tools/upload_log.py -q --description "${ghprbPullDescription}" --source CI .ros/rootfs/fs/microsd/log/*/*.ulg'
+            }
           }
         }
 
@@ -419,9 +455,18 @@ pipeline {
             }
           }
           steps {
+            sh 'make clean; rm -rf .ros; rm -rf .gazebo'
             sh 'make posix_sitl_default'
             sh 'make posix_sitl_default sitl_gazebo'
             sh './test/rostest_px4_run.sh mavros_posix_test_mission.test mission:=multirotor_box.mission vehicle:=iris'
+          }
+          post {
+            always {
+              archiveArtifacts '**/*.ulg'
+              archiveArtifacts '.ros/log/*.log'
+              archiveArtifacts '.ros/test_results/px4/**.xml'
+              //sh './Tools/upload_log.py -q --description "${ghprbPullDescription}" --source CI .ros/rootfs/fs/microsd/log/*/*.ulg'
+            }
           }
         }
 
@@ -433,9 +478,18 @@ pipeline {
             }
           }
           steps {
+            sh 'make clean; rm -rf .ros; rm -rf .gazebo'
             sh 'make posix_sitl_default'
             sh 'make posix_sitl_default sitl_gazebo'
             sh './test/rostest_px4_run.sh mavros_posix_tests_offboard_attctl.test'
+          }
+          post {
+            always {
+              archiveArtifacts '**/*.ulg'
+              archiveArtifacts '.ros/log/*.log'
+              archiveArtifacts '.ros/test_results/px4/**.xml'
+              //sh './Tools/upload_log.py -q --description "${ghprbPullDescription}" --source CI .ros/rootfs/fs/microsd/log/*/*.ulg'
+            }
           }
         }
 
@@ -447,9 +501,18 @@ pipeline {
             }
           }
           steps {
+            sh 'make clean; rm -rf .ros; rm -rf .gazebo'
             sh 'make posix_sitl_default'
             sh 'make posix_sitl_default sitl_gazebo'
             sh './test/rostest_px4_run.sh mavros_posix_tests_offboard_posctl.test'
+          }
+          post {
+            always {
+              archiveArtifacts '**/*.ulg'
+              archiveArtifacts '.ros/log/*.log'
+              archiveArtifacts '.ros/test_results/px4/**.xml'
+              //sh './Tools/upload_log.py -q --description "${ghprbPullDescription}" --source CI .ros/rootfs/fs/microsd/log/*/*.ulg'
+            }
           }
         }
 

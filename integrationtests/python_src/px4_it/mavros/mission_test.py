@@ -477,9 +477,9 @@ class MavrosMissionTest(unittest.TestCase):
         self.wait_on_landed_state(ExtendedState.LANDED_STATE_ON_GROUND, 10, -1)
 
         rospy.loginfo("seting mission mode")
-        self.set_mode("AUTO.MISSION", 5)
+        self.set_mode("AUTO.MISSION", 15)
         rospy.loginfo("arming")
-        self.set_arm(True, 5)
+        self.set_arm(True, 15)
 
         rospy.loginfo("run mission")
         for index, waypoint in enumerate(wps):
